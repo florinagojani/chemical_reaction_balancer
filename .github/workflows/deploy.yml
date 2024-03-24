@@ -1,0 +1,38 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Replace '3.x' with your Python version
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Replace with your requirements file name
+
+      - name: Run migrations
+        run: |
+          python manage.py migrate
+
+      - name: Collect static files
+        run: |
+          python manage.py collectstatic --no-input
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./static  # Replace './static' with the directory containing your static files
+
