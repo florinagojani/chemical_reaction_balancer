@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Reaction Balancer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://media.gettyimages.com/id/482804975/video/molecular-structure.jpg?s=640x640&k=20&c=PPMKyxRjlGoc7oQ-PNYED4V7DyGfs7sthrWuo48L32E=');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            color: #f0f0f0; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+        }
+        h1 {
+            color: #3b6694; 
+            margin-bottom: 20px;
+        }
+
+        .balanced-reaction {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8); 
+            color: #f0f0f0; 
+            padding: 20px;
+            border-radius: 30px;
+            border: 2px solid #acc8e5; 
+            width: 100%;
+            box-sizing: border-box;
+            float: right;
+        }
+        .input-section {
+            clear: both;
+            width: 100%;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc; 
+            resize: none;
+            font-size: 16px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #336699; 
+            color: #fff; 
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 5px; 
+}
+
+input[type="submit"]:hover {
+    background-color: #255580;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WELCOME TO THE CHEMICAL REACTION BALANCER</h1>
+        
+        
+        <div class="balanced-reaction">
+            <h2>AN EXAMPLE</h2>
+            <p><strong>H2 + O2 = H2O</strong></p>
+            <p>The balanced reaction would be:</p>
+            <p><strong>2H2 + O2 = 2H2O</strong></p>
+            <p>This balanced equation ensures that the number of atoms of each element is equal on both sides of the reaction.</p>
+        </div>
+        
+        <div class="input-section">
+            <h2 style="color: #336699;">Enter an Unbalanced Chemical Reaction</h2>
+            <p><strong style="color: black;">Note:</strong> <strong style="color: #336699;">Use uppercase for the first character in the element name and lowercase for the second. Example: Fe, Au, Co, Br, C, O, N, F. Numbers don't need to be written as subscripts.</strong></p>
+            <form method="post">
+                {% csrf_token %}
+                <textarea name="reaction" rows="1" placeholder="Enter unbalanced reaction"></textarea><br>
+                <input type="submit" value="Balance Reaction">
+            </form>
+            
+            {% if balanced_reaction %}
+            <div class="balanced-reaction">
+                <h2>BALANCED REACTION</h2>
+                <p>{{ balanced_reaction }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
