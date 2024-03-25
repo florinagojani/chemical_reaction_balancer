@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'  # Ensure this matches the Python version in your local environment or virtual environment (myenv)
+
+      - name: Run migrations
+        run: |
+          python manage.py migrate
+
+      - name: Collect static files
+        run: |
+          python manage.py collectstatic --no-input
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /Users/kristjan/Desktop/myproject/ReactionBalancer/static/admin  
