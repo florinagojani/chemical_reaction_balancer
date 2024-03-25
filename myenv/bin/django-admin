@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/Users/kristjan/Desktop/PROJEKTI FINAL 3/myenv/bin/python3.11" "$0" "$@"
-' '''
+#!/Users/kristjan/Desktop/myproject/myenv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
