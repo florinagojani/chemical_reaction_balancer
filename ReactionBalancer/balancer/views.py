@@ -1,9 +1,7 @@
-# views.py
 from django.shortcuts import render
-from utils.openai_client import OpenAIClient
 from django.http import HttpResponseServerError
+from utils.openai_client import OpenAIClient
 from chempy import Substance
-
 
 class InvalidReactionError(Exception):
     pass
