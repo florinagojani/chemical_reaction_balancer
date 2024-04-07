@@ -1,1 +1,1 @@
-web: gunicorn ReactionBalancer.wsgi --log-file -
+web: gunicorn ReactionBalancer.wsgi
